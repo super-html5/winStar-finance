@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>中秋节赠油赢免单</title>
+    <link rel="stylesheet" href="static/reunion.css">
+    <script>
+        window.use_screen_base = '640';
+    </script>
+    <script src="static/jquery-3.1.0.min.js"></script>
+    <script src="static/public.js"></script>
+    <script src="static/reunion.js"></script>
+</head>
+<body>
+<div class="head">
+    <img class="indexBtn" src="img/indexBtn.png" alt="我要参与">
+    <a class="indexHerf" href="reunion-history.html">历史中奖用户</a>
+</div>
+<div class="contentBox">
+    <!--<div class="contentList">-->
+    <!--<p>9月26日中奖用户</p>-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<th>ID</th>-->
+    <!--<th>电话号码</th>-->
+    <!--<th>返现金额</th>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>mmp</td>-->
+    <!--<td>132****1234</td>-->
+    <!--<td>100元</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>nmp</td>-->
+    <!--<td>182****3214</td>-->
+    <!--<td>200元</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>mnp</td>-->
+    <!--<td>158****4321</td>-->
+    <!--<td>500元</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</div>-->
+    <!--<img class="notBeginBg" src="img/notBegin.png" alt="未开始">-->
+</div>
+<div class="content">
+    <p style="margin-right: 0.4rem">———— 活动说明 ————</p>
+    <ol>
+        <li>活动时间：2017年9月27日—10月10日；</li>
+        <li>活动期间，凡成功将已购买油卡赠送给好友的用户，即有机会获得免单；</li>
+        <li>优驾行对前一天成功参与的用户进行系统抽奖，并将抽奖结果于当天24:00在活动页面进行公示；</li>
+        <li>中奖用户将收到短信通知，优驾行会在7个工作日内，将等额油卡代金券发放至“我的优惠券”中，请升级至最新版本查看并使用优惠券；</li>
+        <li>本次活动最终解释权归优驾行所有。</li>
+    </ol>
+</div>
+
+<div class="popup">
+    <img class="alertBtnA" src="img/alertBtnA.png" alt="去赠送">
+    <img class="alertBtnB" src="img/alertBtnB.png" alt="去购买">
+    <img class="offBtn" src="img/offBtm.png" alt="关闭">
+</div>
+<input type="hidden" id="_token_id">
+<div class="mask"></div>
+</body>
+<script>
+
+    /**
+     * 和APP端交互获取token_id
+     * @returns {[*,*]} tempFlag == 0 为IOS设备 tempFlag == 1 为android设备
+     * @private
+     */
+    var tokenIdTemp = null;
+    _getTokenId();
+    function _getTokenId() {
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isiOS) {
+            window.webkit.messageHandlers.getMobleTokinIdFunc.postMessage("getTokenId");
+        } else if (isAndroid) {
+            tokenIdTemp = androidBaseInterface.getToken();
+            $('#_token_id').val(tokenIdTemp);
+            init(tokenIdTemp);
+        }
+    }
+    function getTokenId(tokenId) {
+        $('#_token_id').val(tokenId);
+        init(tokenId);
+    }
+
+    $('.indexBtn').on('click', function () {
+        $('.popup').show();
+        $('.mask').show();
+        signUp();
+    });
+
+    $('.offBtn').on('click', function () {
+        $('.popup').hide();
+        $('.mask').hide();
+    });
+
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    $('.alertBtnA').on('click', function () {
+        if (isiOS) {
+            window.location.href = 'yjxroute://oilCardList';
+        } else if (isAndroid) {
+            window.location.href = 'android-app://component=com.wsd.yjx%2f.oil_card.order.OilOrderListActivity;launchFlags=0x07000000;end';
+        }
+    });
+
+    $('.alertBtnB').on('click', function () {
+        if (isiOS) {
+            window.location.href = 'yjxroute://limitRushToBuy';
+        } else if (isAndroid) {
+            window.location.href = 'android-app://component=com.wsd.yjx%2f.panic_buy.PanicBuyActivity;launchFlags=0x07000000;end';
+        }
+    });
+
+
+    function init(tokenId) {
+        //查询中奖接口
+        $.ajax({
+            type: "GET",
+            url: "/wechat_access/api/v1/nationalActivity/midAutumn/get",
+            headers: {
+                'token_id': tokenId
+            },
+            data: {
+                timeType: 0
+            },
+            dataType: "JSON",
+            success: function (result) {
+                console.log(result);
+                for (var i of result) {
+                    var str = '<div class="contentList"><p>' + i.day + '中奖用户</p><table>' +
+                        '<tr><th>ID</th><th>电话号码</th><th>返现金额</th></tr>';
+                    var strList = '';
+                    var listEnd = '</table></div>';
+                    for (var x of i.winners) {
+                        strList += '<tr><td>' + x.nickName + '</td><td>' + x.telPhone + '</td><td>' + x.number + '元</td></tr>';
+                    }
+                    $('.contentBox').append(str + strList + listEnd);
+                }
+            },
+            error: function (error) {
+                console.log(error.status);
+                if (error.status == 404) {
+                    $('.contentBox').append('<img class="notBeginBg" src="img/notBegin.png" alt="未开始">');
+                }
+            }
+        });
+    }
+
+
+    // 报名接口
+    var name = getUrlParams("name");
+    var phoneNumber = getUrlParams("phoneNumber");
+    function signUp() {
+        $.ajax({
+            type: "POST",
+            url: "/wechat_access/api/v1/nationalActivity/midAutumn/signUp",
+            headers: {
+                'token_id': $('#_token_id').val()
+            },
+            data: JSON.stringify({
+                'nickName': name,
+                'telPhone': phoneNumber
+            }),
+            success: function (res) {
+                console.log(res);
+            },
+            error: function () {
+                console.log("当前服务器繁忙，请稍后再试！");
+            }
+        });
+    }
+</script>
+</html>

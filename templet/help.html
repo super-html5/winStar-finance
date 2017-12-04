@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>常见问题</title>
+
+    <!-- Bootstrap -->
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+      .red{color:#E31D24;}
+      .financial-issue-box{position: absolute;padding:0 30px; overflow-y: scroll;top:0;}
+      .financial-issue-box>h4{padding-top: 14px;}
+      .financial-issue-box h6{margin-top: 6px;margin-bottom: 6px;}
+      .financial-issue-box ul li{ margin-top: 20px;}
+      .bto-h1{ margin-top: 20px; margin-bottom: 10px;}
+      .btn-primary{background-color: #6BD2CF; border-color: #6BD2CF;}
+    </style>
+  </head>
+  <body>
+  <div class="container-fluid financial-issue-box">
+    <h4 class="red text-center">常见问题</h4>
+    <ul class="list-unstyled">
+      <li>
+        <h6><span class="red">问：</span> 我能贷多少钱？</h6>
+        <h6><span>答：</span>如果您资信良好，一般都可以贷到车辆估值的80%。</h6>
+      </li>
+      <li>
+        <h6><span class="red">问：</span> 借款利息是多少？</h6>
+        <h6><span>答：</span>目前年化利息为13%-18%，视客户资质而定。价格透明，且远低于同类产品市场价。</h6>
+      </li>
+      <li>
+        <h6><span class="red">问：</span> 是否有手续费或其他费用？</h6>
+        <h6><span>答：</span>无任何手续费。</h6>
+      </li>
+      <li>
+        <h6><span class="red">问：</span> 办理流程是怎样的？</h6>
+        <h6><span>答：</span>您申请成功后，我们的业务人员会尽快联系您，然后您需要带相关资料来线下进行车辆评估和面审，通过即可放款。</h6>
+      </li>
+      <li>
+        <h6><span class="red">问：</span> 申请后多长时间可以拿到钱？</h6>
+        <h6><span>答：</span>在申请后，我们会和您预约时间，如果您能即时来网点办理，则办理当天即可放款。</h6>
+      </li>
+      <li>
+        <h6><span class="red">问：</span> 贷款是否正规？</h6>
+        <h6><span>答：</span>资金出借机构为西安市国信小额贷款有限公司，正规国企，工商局网站可查。</h6>
+      </li>
+    </ul>
+    <div class="row">
+      <div class="col-xs-12" style="margin-bottom: 10%;margin-top: 30px;">
+        <h6 class="red bto-h1 text-center">更多疑问请电话咨询：<a href="tel:4008012122" style="text-decoration: underline;color: #337ab7">4008012122</a></h6>
+        <button id="goToBack" type="button"  style="background-color: #52b0ba;color:#ffffff" class="btn btn-primary btn-block">去申请贷款</button>
+      </div>
+    </div>
+  </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery-3.1.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+   <script type="text/javascript" charset="UTF-8">
+   	$("#goToBack").click(function(){
+   		window.history.go(-1);
+   	})
+   </script>
+  </body>
+</html>

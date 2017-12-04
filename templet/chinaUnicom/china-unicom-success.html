@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>领取成功</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" >
+
+    <script src="../../js/jquery-3.1.0.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="title-success"></div>
+            <button id="down-load" type="button" class="button-card"><b>飞奔去使用</b></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    $("#down-load").click(function () {
+        if (isiOS) {
+            window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.wsd.yjx';
+        } else if (isAndroid) {
+            window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.wsd.yjx';
+        }
+    });
+
+</script>
+
+</body>
+</html>

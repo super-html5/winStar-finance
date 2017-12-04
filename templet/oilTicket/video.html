@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <!--<script src="http://api.html5media.info/1.1.4/html5media.min.js"></script>-->
+    <!--<script src="videojs-ie8.min.js"></script>-->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        video::-internal-media-controls-download-button {
+            display: none;
+        }
+
+        video::-webkit-media-controls-enclosure {
+            overflow: hidden;
+        }
+
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+
+        video::-webkit-media-controls-fullscreen-button {
+            visibility: hidden;
+        }
+
+        #oilTicket {
+            width: 100%;
+        }
+
+        .btn {
+            width: 96%;
+            position: absolute;
+            left: 2%;
+            bottom: 2%;
+            z-index: 999;
+        }
+
+        @media screen and (max-width:320px){
+
+            .videoBg {
+                width: 96%;
+                height: 280px;
+                position: absolute;
+                left: 2%;
+                top: 9%;
+                z-index: 999;
+                background: url("videoBgImg.png") no-repeat;
+                background-size: 100%;
+            }
+
+            .video {
+                width: 90%;
+                position: absolute;
+                left: 5%;
+                top: 16%;
+                z-index: 8999;
+            }
+        }
+
+        @media screen and (min-width: 321px) and (max-width:412px) {
+            .videoBg {
+                width: 96%;
+                height: 280px;
+                position: absolute;
+                left: 2%;
+                top: 9%;
+                z-index: 999;
+                background: url("videoBgImg.png") no-repeat;
+                background-size: 100%;
+            }
+
+            .video {
+                width: 320px;
+                height: 180px;
+                position: absolute;
+                left: 50%;
+                margin-left: -160px;
+                top: 18%;
+                z-index: 8999;
+            }
+        }
+
+        @media screen and (min-width: 413px) {
+            .videoBg {
+                width: 96%;
+                height: 280px;
+                position: absolute;
+                left: 2%;
+                top: 9%;
+                z-index: 999;
+                background: url("videoBgImg.png") no-repeat;
+                background-size: 100%;
+            }
+
+            .video {
+            width: 90%;
+            height: 200px;
+            position: absolute;
+            left: 5%;
+            top: 22%;
+            z-index: 8999;
+            }
+        }
+    </style>
+</head>
+<body>
+<img src="./oilTicketBg.jpg" alt="优驾行" id="oilTicket">
+<div class="videoBg">
+    <iframe frameborder="0" class="video" src="https://v.qq.com/iframe/player.html?vid=u0538h6tn8i&tiny=0&auto=0" allowfullscreen></iframe>
+</div>
+<a id="oilTicketHerf" href="http://stat.sxwinstar.net/download/count?channel=7">
+    <img src="btn.png" alt="按钮" class="btn">
+</a>
+<!--https://wsd-bank.oss-cn-shanghai.aliyuncs.com/88z.mp4-->
+</body>
+<script>
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    document.getElementById('oilTicketHerf').onclick = function() {
+        if (isiOS) {
+            window.location.href = 'yjxroute://oilCardroot';
+        } else if (isAndroid) {
+            window.location.href = 'android-app://component=com.wsd.yjx%2f.oil_card.product.OilProductActivity;launchFlags=0x07000000;end';
+        }
+    };
+</script>
+</html>

@@ -1,0 +1,141 @@
+body {
+    background-color: #008bf0;
+}
+
+.container-box {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    z-index: 10;
+    overflow-y: scroll;
+}
+
+/*信息输入*/
+.page1_01 {
+    height: 4.45rem;
+    background: url("../image/page1_01.jpg") center no-repeat;
+}
+
+.page1_02 {
+    height: .91rem;
+    background: url("../image/page1_02.jpg") center no-repeat;
+}
+
+.page1_03 {
+    height: 1.55rem;
+    background: url("../image/page1_03.jpg") center no-repeat;
+}
+
+.page1_04 {
+    height: .98rem;
+    background: url("../image/page1_04.jpg") center no-repeat;
+}
+
+.page1_05 {
+    height: 4.17rem;
+    background: url("../image/page1_05.png") center no-repeat;
+}
+
+.input-card {
+    margin-top: 0.22rem;
+    border: none;
+    outline: 0;
+    text-align: center;
+    width: 66%;
+}
+
+input::-webkit-input-placeholder {
+    color: #ccc;
+    opacity: 1;
+}
+
+input:-ms-input-placeholder {
+    color: #ccc;
+    opacity: 1;
+}
+
+input::placeholder {
+    color: #ccc;
+    opacity: 1;
+}
+
+/*领取成功*/
+.page2_01 {
+    height: 4.44rem;
+    background: url("../image/page2_01.gif") center no-repeat;
+}
+
+.page2_02 {
+    height: 2.28rem;
+    background: url("../image/page2_02.gif") center no-repeat;
+}
+
+.page2_03 {
+    height: .99rem;
+    background: url("../image/page2_03.gif") center no-repeat;
+}
+
+.page2_04 {
+    height: .98rem;
+    background: url("../image/page2_04.gif") center no-repeat;
+}
+
+.page2_05 {
+    height: 3.37rem;
+    background: url("../image/page2_05.gif") center no-repeat;
+}
+
+.page {
+    width: 7.5rem;
+    padding: 0;
+    background-size: contain;
+}
+
+/*弹出层*/
+.layer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .7);
+    z-index: 20;
+}
+
+.dialogs1 {
+    z-index: 21;
+    background: url("../image/dialogs1.png") center no-repeat;
+}
+
+.dialogs2 {
+    z-index: 23;
+    background: url("../image/dialogs2.png") center no-repeat;
+}
+
+.dialogs1, .dialogs2 {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: -3rem auto 0;
+    width: 5.2rem;
+    height: 6rem;
+    background-size: contain;
+}
+
+.dialogs1-button {
+    z-index: 22;
+    background: url("../image/dialogs1-button.png") center no-repeat;
+}
+
+.dialogs2-button {
+    z-index: 24;
+    background: url("../image/dialogs2-button.png") center no-repeat;
+}
+
+.dialogs1-button, .dialogs2-button {
+    margin: 4rem auto 0;
+    width: 3.86rem;
+    height: .73rem;
+    background-size: contain;
+}

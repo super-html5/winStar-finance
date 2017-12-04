@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <style>
+        body {
+            background-image: url('./358192553142172880.png');
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        
+        img {
+            position: absolute;
+            bottom: 10%;
+            width: 244px;
+            left: 50%;
+            margin-left: -122px;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="g" src="516251713498623553.png">
+    <script>
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        document.getElementById('g').onclick = function() {
+//            if (isiOS) {
+//                window.location.href = 'yjxroute://oilCardroot';
+//            } else if (isAndroid) {
+//                window.location.href = 'android-app://component=com.wsd.yjx%2f.oil_card.product.OilProductActivity;launchFlags=0x07000000;end';
+//            }
+
+            if (isiOS) {
+                window.location.href = 'yjxroute://limitRushToBuy';
+            } else if (isAndroid) {
+                window.location.href = 'android-app://component=com.wsd.yjx%2f.panic_buy.PanicBuyActivity;launchFlags=0x07000000;end';
+            }
+        };
+    </script>
+</body>
+
+</html>

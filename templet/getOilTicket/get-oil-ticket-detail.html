@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>领取代金券</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" >
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="js/getOilTicket.js"></script>
+</head>
+<body>
+<div class="container text-center" style="padding:0;">
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+                您已成功领取！<br>
+                优惠券已放入 <span id="oilTicket" class="blue">您的优惠券包</span>
+            </p>
+        </div>
+        <div class="col-xs-12">
+            <div class="detail-bg detail-bg01"></div>
+            <div class="detail-bg detail-bg02 orange"><b><span id="amount">5</span>元代金卡</b></div>
+            <div class="detail-bg detail-bg03"></div>
+            <button id="sub" type="button" class="button-card"><b>立即使用</b></button>
+        </div>
+        <div class="col-xs-12 code"><img src="code.png" class="img-responsive"></div>
+        <div class="col-xs-12 padding15 paddingTop"><img src="title.png" class="img-responsive"></div>
+        <div class="col-xs-12 text-left grey padding15">
+            1.用户需下载优驾行easy APP，使用领取代金券的手机号码登录，在个人中心“我的优惠券”中可查看已领取的代金券。<br>
+            2.代金券的使用规则在APP中查看，且只能在优驾行easy APP中使用。<br>
+            3.优驾行保留法律范围内允许的对活动的解释权。
+        </div>
+    </div>
+</div>
+</body>
+</html>

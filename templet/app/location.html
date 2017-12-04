@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <title></title>
+</head>
+
+<body>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+</body>
+<script>
+    var _androidUrl = getUrlParam('androidUrl');
+    var _iosUrl = getUrlParam('iosUrl');
+    var _channel = getUrlParam('channel');
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  // 匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; // 返回参数值
+    }
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    if (isiOS) {
+        loc(_iosUrl, 1, _channel);
+    } else if (isAndroid) {
+        loc(_androidUrl, 0, _channel);
+    }
+    function loc(_url, _type, _channel) {
+        $.ajax({
+            //提交数据的类型 POST GET
+            type: "GET",
+            //提交的网址
+            url: 'http://stat.sxwinstar.net/download/type/count?type=' + _type + '&channel=' + _channel,
+            //返回数据的格式
+            dataType: "json",
+            //成功返回之后调用的函数
+            success: function () {
+                location.href = _url;
+            },
+            //调用出错执行的函数
+            error: function () {
+                location.href = _url;
+            }
+        });
+    }
+</script>
+</html>

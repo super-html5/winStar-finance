@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>领取代金券-联通用户专享</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">
+    <script src="../../js/jquery-3.1.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css"/>
+    <script src="js/main.js"></script>
+
+</head>
+<body>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="logo"></div>
+            <div class="title-index"></div>
+        </div>
+        <div class="col-xs-12">
+            <input id="phone" type="tel" maxlength="11" class="input-card" placeholder="请输入手机号"/>
+            <h4 class="red">立得优驾行<b>5元</b>加油代金券<br>
+                还可享<b>8.8折</b>油券优惠
+            </h4>
+            <button id="sub" type="button" class="button-card"><b>领取油券</b></button>
+        </div>
+
+        <div class="col-xs-12 title-introdution"></div>
+        <div class="col-xs-12 text-left grey padding15">
+            1、凡联通用户，填写手机号码，可获得优驾行5元加油代金券。<br/>
+            2、该加油代金券可用于“优驾行easy APP”平台内油卡购买，下载“优驾行easy APP”即可使用。<br/>
+            3、该加油代金券不兑换、不找零，不与平台内其他优惠同时使用。<br/>
+            4、本次活动最终解释权归优驾行所有。如果疑问，请致电400-801-2122。
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
+
+<script>
+
+    //手机验证
+    function checkInput() {
+        var phone = $("#phone");
+        if (phone.val().length === 11) {
+            var phoneTest = phone.val().substring(0, 3);
+            if (phoneTest === '130' || phoneTest === '131' || phoneTest === '132' || phoneTest === '155' || phoneTest === '156' ||
+                    phoneTest === '145' || phoneTest === '175' || phoneTest === '176' || phoneTest === '185' || phoneTest === '186'
+            ) {
+                return true;
+            } else {
+                swal({
+                    text: '仅限联通用户参与',
+                    confirmButtonText: '确定'
+                });
+                phone.focus();
+                return false;
+            }
+        } else {
+            swal({
+                text: '请输入正确的手机号码',
+                confirmButtonText: '确定'
+            });
+            phone.focus();
+            return false;
+        }
+        return false;
+    }
+
+    $("#sub").click(function () {
+        var phoneNumber = $("#phone").val();
+        if (checkInput()) {
+            checkPhone(phoneNumber);
+        }
+    });
+
+    //根据手机号获取用户基本信息
+    function checkPhone(phoneNumber) {
+        showloaddinghtml5(1);
+        var phoneNumber = $("#phone").val();
+        $.ajax({
+            //提交数据的类型 POST GET
+            type: "POST",
+            headers: {'Content-Type': 'application/json'},
+            //提交的网址
+            url: 'https://mobile.sxwinstar.net/wechat_access/api/user/account/loginH5?mobile=' + phoneNumber + '&verify=24b6e946d4594661a58bd235fe639544',
+        //    url: '/wechatApi-ng4/api/user/account/loginH5?mobile=' + phoneNumber + '&verify=24b6e946d4594661a58bd235fe639544',
+            //返回数据的格式
+            dataType: "json",
+            //成功返回之后调用的函数
+            success: function (data) {
+                oilCard(data.id);
+            },
+            //调用出错执行的函数
+            error: function (data) {
+                showloaddinghtml5(0);
+                swal({
+                    text: '网络异常！',
+                    confirmButtonText: '确定'
+                });
+            }
+        });
+    }
+
+
+    //验证手机号码是否领取过优惠券
+    function oilCard(accountId) {
+        var tel = $("#phone").val();
+        $.ajax({
+            //提交数据的类型 POST GET
+            type: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'token_id': '2b254bec-dd48-11e6-81f7-9457a5545c84',
+                'accountId': accountId
+            },
+            //提交的网址
+          url: 'https://mobile.sxwinstar.net/wechat_access/api/v1/marketing/coupon/receive/common?activityId=50db459b5ed07a32015f0f6f303d0004&telPhone=' + tel ,
+  //      url: '/wechatApi-ng4/api/v1/marketing/coupon/receive/common?activityId=50db459b5ed07a32015f0f6f303d0004&telPhone=' + tel,
+            //返回数据的格式
+            dataType: "json",
+            //成功返回之后调用的函数
+            success: function (data) {
+                showloaddinghtml5(0);
+                console.log(data);
+                location.href = 'china-unicom-success.html';
+            },
+            //调用出错执行的函数
+            error: function (data) {
+                showloaddinghtml5(0);
+                if (data.responseJSON.code == 'coupons.AuthFail') {
+                    swal({
+                        text: '你已经领取过！',
+                        confirmButtonText: '确定'
+                    });
+                }
+                if (data.responseJSON.code == 'NotAllow') {
+                    swal({
+                        text: '活动未开始！',
+                        confirmButtonText: '确定'
+                    });
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

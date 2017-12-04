@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加油优惠券</title>
+    <meta name="renderer" content="webkit"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no,address=no,email=no"/>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        window.use_screen_base = '640';
+    </script>
+</head>
+<body>
+<div class="content">
+    <img src="img/page3_01.png" alt="">
+    <div class="getSuccessImg">
+        <img src="img/page3_02.png" alt="">
+        <img id="money" src="img/4.png" alt="">
+        <p>使用期限：<span id="now"></span>-<span id="twoWeekAfter"></span></p>
+    </div>
+    <div class="useImg">
+        <img src="img/page3_03.png" alt="">
+        <button id="download"></button>
+    </div>
+
+    <img src="img/page3_04.jpg" alt="">
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        var money = getUrlParams('myAttr');
+        $("#money").attr("src", money);
+
+        var date = new Date(getUrlParams("date"));
+        var now = new Date(getUrlParams("date"));
+        now.setDate(now.getDate() + 14);
+
+
+        /**
+         * 转换时间格式为：YYYY-MM-DD
+         * @returns {string}
+         */
+        function getNowFormatDate(date) {
+            var seperator1 = ".";
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = year + seperator1 + month + seperator1 + strDate;
+            return currentdate;
+        }
+
+        $("#now").html(getNowFormatDate(date));
+        $("#twoWeekAfter").html(getNowFormatDate(now));
+        /**
+         * 点击跳转下载app
+         */
+        $("body").on("click", "#download", function () {
+            var u = navigator.userAgent, app = navigator.appVersion;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
+            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+            // 是安卓浏览器
+            if (isAndroid) {
+                window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.wsd.yjx'; // 跳安卓端下载地址
+            }
+            // 是iOS浏览器
+            if (isIOS) {
+                window.location.href = 'https://itunes.apple.com/cn/app/uez/id1124821366?mt=8'; // 跳AppStore下载地址
+            }
+
+        });
+
+        function getUrlParams(name, url) {
+            if (!url) url = window.location.href;
+            var params = {};
+            var url = decodeURI(url);
+            var idx = url.indexOf("?");
+            if (idx > 0) {
+                var queryStr = url.substring(idx + 1);
+                var args = queryStr.split("&");
+                for (var i = 0, a, nv; a = args[i]; i++) {
+                    nv = args[i] = a.split("=");
+                    params[nv[0]] = nv.length > 1 ? nv[1] : true;
+                }
+            }
+            return params[name];
+        }
+    });
+
+</script>
+</html>

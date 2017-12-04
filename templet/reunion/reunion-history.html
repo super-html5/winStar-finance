@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>历史中奖用户</title>
+    <link rel="stylesheet" href="static/reunion.css">
+    <script>
+        window.use_screen_base = '640';
+    </script>
+    <script src="static/jquery-3.1.0.min.js"></script>
+    <script src="static/public.js"></script>
+    <script src="static/reunion.js"></script>
+</head>
+<body>
+<div class="head">
+    <p class="headP">历史中奖用户</p>
+</div>
+<div class="contentBox">
+    <!--<div class="contentList">-->
+    <!--<p>9月26日中奖用户</p>-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<th>ID</th>-->
+    <!--<th>电话号码</th>-->
+    <!--<th>返现金额</th>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>mmp</td>-->
+    <!--<td>132****1234</td>-->
+    <!--<td>100元</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>nmp</td>-->
+    <!--<td>182****3214</td>-->
+    <!--<td>200元</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>mnp</td>-->
+    <!--<td>158****4321</td>-->
+    <!--<td>500元</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</div>-->
+
+    <!--<div class="contentList">-->
+    <!--<p>9月27日中奖用户</p>-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<th>ID</th>-->
+    <!--<th>电话号码</th>-->
+    <!--<th>返现金额</th>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>mmp</td>-->
+    <!--<td>132****1234</td>-->
+    <!--<td>100元</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>nmp</td>-->
+    <!--<td>182****3214</td>-->
+    <!--<td>200元</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>mnp</td>-->
+    <!--<td>158****4321</td>-->
+    <!--<td>500元</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</div>-->
+
+    <!--<div class="contentList">-->
+    <!--<p>9月28日中奖用户</p>-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<th>ID</th>-->
+    <!--<th>电话号码</th>-->
+    <!--<th>返现金额</th>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>mmp</td>-->
+    <!--<td>132****1234</td>-->
+    <!--<td>100元</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>nmp</td>-->
+    <!--<td>182****3214</td>-->
+    <!--<td>200元</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>mnp</td>-->
+    <!--<td>158****4321</td>-->
+    <!--<td>500元</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</div>-->
+
+</div>
+<input type="hidden" id="_token_id">
+</body>
+<script>
+    /**
+     * 和APP端交互获取token_id
+     * @returns {[*,*]} tempFlag == 0 为IOS设备 tempFlag == 1 为android设备
+     * @private
+     */
+    var tokenIdTemp = null;
+    _getTokenId();
+    function _getTokenId() {
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isiOS) {
+            window.webkit.messageHandlers.getMobleTokinIdFunc.postMessage("getTokenId");
+        } else if (isAndroid) {
+            tokenIdTemp = androidBaseInterface.getToken();
+            $('#_token_id').val(tokenIdTemp);
+            init(tokenIdTemp);
+        }
+    }
+    function getTokenId(tokenId) {
+        $('#_token_id').val(tokenId);
+        init(tokenId);
+    }
+
+    //查询中奖接口
+    function init(tokenId) {
+        $.ajax({
+            type: "GET",
+            url: "/wechat_access/api/v1/nationalActivity/midAutumn/get",
+            headers: {
+                'token_id': tokenId
+            },
+            data: {
+                timeType: 1
+            },
+            dataType: "JSON",
+            success: function (result) {
+                for (var i of result) {
+                    var str = '<div class="contentList"><p>' + i.day + '中奖用户</p><table>' +
+                        '<tr><th>ID</th><th>电话号码</th><th>返现金额</th></tr>';
+                    var strList = '';
+                    var listEnd = '</table></div>';
+                    for (var x of i.winners) {
+                        strList += '<tr><td>' + x.nickName + '</td><td>' + x.telPhone + '</td><td>' + x.number + '元</td></tr>';
+                    }
+                    $('.contentBox').append(str + strList + listEnd);
+                }
+            },
+            error: function () {
+                console.log("当前服务器繁忙，请稍后再试！");
+            }
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>申请递交成功</title>
+
+		<!-- Bootstrap -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="row"><img src="../img/xykzxbl.png" class="img-responsive center-block" alt="优车贷@2x" /></div>
+		</div>
+		<div class="container-fluid text-center" style="padding:20% 0;">
+			<img src="../img/duihao.png" width="26%" class="center-block" alt="优车贷@2x" />
+			<h3 style="color: #da251d;">恭喜您申请递交成功</h3>
+		</div>
+		<div class="container-fluid text-center text-muted">
+			您的申请已提交<br> 我们的客服人员会尽快与您联系
+			<br> 请您保持电话畅通
+		</div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="../js/jquery-3.1.0.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/public.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			window.ycd = 1;
+			window.qcd = 2;
+			window.ced = 3;
+
+			function switchdk() {
+				var type = getUrlParams("data")
+				if(type == window.ycd) {
+					document.title = "优车贷"
+					
+				} else if(type == window.qcd) {
+					document.title = "青春贷"
+					
+				} else if(type == window.ced) {
+					document.title = "车易贷"
+					
+				}
+			}
+
+			switchdk();
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>电子油券购买服务协议</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <style type="text/css">
+        body{font-family:微软雅黑; font-size:12px;orphans:0; widows:0}
+        ol{ margin:0; padding-left:0;}
+        ol li{list-style-position:inside;}
+    </style>
+</head>
+<body>
+<div id="agreement" class="container" style="padding-top:25px;padding-bottom:15px;">
+    <!--<p style="text-align:center;font-size:16pt; font-weight:bold">电子油券购买服务协议</p><br>-->
+    <!--<p style="text-indent:25pt;">-->
+        <!--本协议是使用优驾行easy 的用户（以下简称用户）和优驾行easy就电子油券购买、使用等相关事宜所订立的电子油券购买服务协议，请您仔细阅读本协议，-->
+        <!--您勾选“同意《电子油券购买服务协议》“复选框后，本协议即生效并构成对双方有约束力的法律文件。</p><br>-->
+    <!--<p>一、协议声明</p>-->
+    <!--<ol type="1">-->
+        <!--<li>&nbsp;优驾行easy通过互联网依法为用户提供电子油券购买、订单查询等服务，用户在完全同意本协议及优驾行easy规定的情况下，方有权使用电子油券购买服务。</li>-->
+        <!--<li>&nbsp;您勾选加油券页面下“同意《电子油券购买服务协议》“复选框后，即视为您已阅读、了解并完全同意本协议的各项内容，并具有独立承担法律责任的能力。</li>-->
+        <!--<li>&nbsp;优驾行easy在必要时可修改本协议，并在优驾行easy APP上进行公告，即公告之日起生效。</li>-->
+    <!--</ol><br>-->
+    <!--<p>二、服务说明</p>-->
+    <!--<ol type="1">-->
+        <!--<li>&nbsp;本服务中的电子油券由陕西易通商联网络支付科技有限公司提供，本电子油券长期有效。</li>-->
+        <!--<li>&nbsp;用户购买成功后，优驾行easy 会先将所购金额的电子油券立即发送给用户使用。</li>-->
+        <!--<li>&nbsp;优驾行easy在必要时可修改本协议，并在优驾行easy APP上进行公告，即公告之日起生效。</li>-->
+    <!--</ol><br>-->
+    <!--<p>三、免责条款</p>-->
+    <!--<p style="text-indent:25pt;">优驾行easy对以下情形不承担责任，包括但不仅限于：</p>-->
+    <!--<ol type="1">-->
+        <!--<li>&nbsp;因不可抗力、系统故障、通讯故障、网络拥堵、供电系统故障、恶意攻击等造成优驾行easy未能及时、准确、完整地提供电子油券购买服务。</li>-->
+        <!--<li>&nbsp;如用户利用系统差错、故障或其他原因导致的漏洞，损害优驾行easy的权益，优驾行easy将中止为该用户提供电子油券购买服务，并保留法律追究的权利。</li>-->
+        <!--<li>&nbsp;优驾行easy负责对优驾行easy APP上的信息进行审核与更新，但并不就信息的时效性、准确性以及服务功能的完整性和可靠性承担任何义务和赔偿责任。</li>-->
+        <!--<li>&nbsp;如果优驾行easy发现有影响用户信息安全的行为，优驾行easy有权采取对用户信息实施保护的措施。</li>-->
+        <!--<li>&nbsp;优驾行easy对以下情形不做任何承诺，包括但不仅限于：</li>-->
+    <!--</ol>-->
+    <!--<p style="text-indent:25pt;">服务一定能符合您的要求；服务不会受中断；服务的安全性、及时性、完整性和准确性。</p>-->
+    <!--<ol start="6" type="1">-->
+        <!--<li>&nbsp;用户应妥善保管账户、密码等信息资料，非因优驾行easy原因造成您的用户信息泄露，由此给您带来的损失优驾行easy不承担任何责任。</li>-->
+        <!--<li>&nbsp;您在使用优驾行easy服务时，因个人原因产生的损失，优驾行easy不承担任何责任。</li>-->
+        <!--<li>&nbsp;任何因第三方服务提供商原因导致本协议中提供的服务具有瑕疵或损害您权益的状况时，优驾行easy不承担赔偿的责任，但可以协调相关方尽快解决您的问题。</li>-->
+    <!--</ol><br>-->
+
+    <!--<p>四、协议争议</p>-->
+    <!--<p style="text-indent:25pt;">本协议之效力、解释、变更、执行与争议解决均适用中华人民共和国法律。如缔约方就本协议内容或其执行发生任何争议，双方应尽力友好协商解决；-->
+        <!--协商不成时，任何一方均可向优驾行easy运营管理公司所在地有管辖权的法院提起诉讼。优驾行easy保留对协议的最终解释权与修改权。</p>-->
+
+</div>
+<script>
+    function loc() {
+        $.ajax({
+            //提交数据的类型 POST GET
+            type: "GET",
+            //提交的网址
+            url: 'https://mobile.sxwinstar.net/wechat_access/api/v1/items/oiltext/list?type=2',
+            //返回数据的格式
+            dataType: "json",
+            //成功返回之后调用的函数
+            success: function (data) {
+                $("#agreement").append(data.content);
+            },
+            //调用出错执行的函数
+            error: function (data) {
+            }
+        });
+    }
+
+    loc();
+
+
+</script>
+</body>
+</html>

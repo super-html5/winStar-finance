@@ -1,0 +1,92 @@
+body{
+    background: url("../bg.png") top center no-repeat;
+    background-size: cover;
+}
+.row {
+    margin: 0;
+}
+.col-xs-12 {
+    padding: 0;
+}
+.grey{
+    color:#777777;
+}
+.red{
+    margin-top: .7rem;
+    color: #E72452;
+}
+
+.logo{
+    margin-top: .5rem;
+    height: .72rem;
+    background: url("../logo.png") left center no-repeat;
+    background-size: contain;
+}
+.title-index{
+    margin-top: .6rem;
+    height: .58rem;
+    background: url("../title-index.png") center no-repeat;
+    background-size: contain;
+}
+.input-card{
+    margin-top: .7rem;
+    border: 1px solid #cccccc;
+    color: #777777;
+    background-color: #DDDDDD;
+    padding: .18rem .2rem;
+    outline: 0;
+    text-align: center;
+    width: 86%;
+}
+.button-card {
+    margin-top: .4rem;
+    outline: 0;
+    border:0;
+    width: 5.8rem;
+    height: .97rem;
+    line-height: .97rem;
+    font-size: .38rem;
+    color: #fff;
+    background: url("../btn-bg.png") center no-repeat;
+    background-size: contain;
+}
+
+.title-introdution{
+    margin-top: .7rem;
+    margin-bottom: .32rem;
+    height: .29rem;
+    background: url("../title-introdution.png") center no-repeat;
+    background-size: contain;
+}
+
+
+.padding15{
+    padding:0 .3rem;
+    font-size: .28rem;
+}
+.title-success{
+    margin-top: 3.6rem;
+    margin-bottom: 1.6rem;
+    height: .75rem;
+    background: url("../title-success.png") center no-repeat;
+    background-size: contain;
+}
+
+
+
+
+/* 弹窗  */
+.swal2-modal .imageLong {
+    margin-top: 0;
+}
+.swal2-modal .swal2-title {
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    text-align: center;
+}
+.swal2-modal .btnLong {
+    margin: 15px;
+    padding: 10px 1.8rem;
+    font-size: 0.6rem;
+}

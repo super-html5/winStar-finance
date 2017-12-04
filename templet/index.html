@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>汽车金融</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .index-margin-bottom {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row" id="financeBanner1">
+        <!--<img src="../img/2017220/xykzxbl.png" id="xyk" class="index-margin-bottom img-responsive center-block"  />-->
+    </div>
+    <div class="row" id="financeBanner2">
+    </div>
+    <div class="row" id="financeBanner3">
+    </div>
+    <div class="row" id="financeBanner4">
+    </div>
+    <div class="row" id="financeBanner5">
+    </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../js/jquery-3.1.0.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/public.js"></script>
+<script type="text/javascript">
+
+
+
+    function submitLog(position,flag){
+
+        var paramsData = {};
+        paramsData['url'] = 'https://mobile.sxwinstar.net/wechat_access/api/v1/community/advert/banner';
+        paramsData['debug'] = false;
+
+        paramsData['position'] = position;
+
+        paramsData['type'] = "get";
+        paramsData['async'] = true;
+        paramsData['funSuccess'] = function(result) {
+            if("" == flag || undefined ==flag || null == flag){
+                var str = '<a href="'+result[0].adUrl+'">';
+            }else{
+                var str = '<a href="'+result[0].adUrl+'?data='+flag+'">';
+            }
+            str += '<img src="'+result[0].url+'" id="' + position + '" class="index-margin-bottom img-responsive center-block" /></a>';
+
+            if(position == 17){
+                $("#financeBanner1").append(str);
+                return;
+            }else if(position == 10){
+                $("#financeBanner2").append(str);
+                return;
+            }else if(position == 11){
+                $("#financeBanner3").append(str);
+                return;
+            }else if(position == 12){
+                $("#financeBanner4").append(str);
+                return;
+            }else if(position == 13){
+                $("#financeBanner5").append(str);
+                return;
+            }
+        };
+        paramsData['funError'] = function (XMLHttpRequest) {
+            //console.log(XMLHttpRequest);
+            };
+        comajax(paramsData);
+   }
+
+    submitLog(17);
+    submitLog(10,1);
+    submitLog(11);
+    submitLog(12);
+    submitLog(13,3);
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>测测你和爱车的亲密度是？</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css"/>
+    <link href="css/global.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    _getTokenId();
+    /**
+     * 和APP端交互获取token_id
+     * @returns {[*,*]} tempFlag == 0 为IOS设备 tempFlag == 1 为android设备
+     * @private
+     */
+    function _getTokenId() {
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isiOS) {
+            //window.webkit.messageHandlers.getMobleTokinIdFunc.postMessage("getTokenId");
+            var xo = {
+                'title': '呵呵呵呵',
+                'dsc': '巴拉阿萨是对的阿斯顿阿斯顿艾斯德斯阿三问问',
+                'url': 'https://www.baidu.com'
+            };
+            window.webkit.messageHandlers.iOSShare.postMessage(JSON.stringify(xo));
+        } else if (isAndroid) {
+            //tokenIdTemp = androidBaseInterface.getToken();
+            androidBaseInterface.doShare('呵呵呵呵', '巴拉阿萨是对的阿斯顿阿斯顿艾斯德斯阿三问问', 'https://www.baidu.com')
+        }
+    }
+    function toShareBack() {
+        alert('123');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title></title>
+
+		<!-- Bootstrap -->
+		<link href="../../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../css/global.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<style>
+			.good-car-loan-three-top {
+				margin-top: 10%;
+			}
+			
+			.form-control {
+				font-size: x-small;
+			}
+			
+			.input-group-addon {
+				background-color: #3f5c7e;
+				color: #ffffff;
+			}
+			
+			.absolute-text-center {
+				position: absolute;
+				text-align: center;
+				width: 100%;
+			}
+			
+			.one-font-size {
+				padding: 10px 15px 10px 15px;
+				width: 60%;
+				left: 20%;
+				top: 75%;
+				background-color: #3f5c7e;
+				font-weight: 900;
+				color: #ffffff;
+			}
+			.form-control{
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 good-car-loan-three-top">
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">购车原价</div>
+							<input type="number" id="gcyj" class="form-control" placeholder="请输入购车时的裸车价" />
+							<div class="input-group-addon" style="font-size: x-small">万元</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-8" style="padding-right: 0">
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">上牌日期</div>
+							<select class="form-control" id="gcyj_year">
+
+							</select>
+							<div class="input-group-addon" style="background-color: #ffffff; color: black;border: 0">年</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-4" style="padding-left: 0">
+					<div class="form-group">
+						<div class="input-group">
+							<select class="form-control" id="gcyj_month">
+
+							</select>
+							<div class="input-group-addon" style="background-color: #ffffff; color: black;border: 0">月</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-8" id="dkje" style="display: none;">
+					<p>您的贷款金额最高为<span id="kdje"></span><span style="color:red">万</span>元</p>
+				</div>
+				<div class="col-xs-12" id="sqje" style="display: none;">
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">申请金额</div>
+							<input type="number" id="sqje_input" class="form-control" placeholder="请输入您的申请金额" />
+							<div class="input-group-addon" style="font-size: x-small">万元</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-8" style="padding-right: 0 ;display: none;" id="dkqx">
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">贷款期限</div>
+							<select class="form-control" id="jdqx">
+								<option>12个月</option>
+								<option>18个月</option>
+								<option>24个月</option>
+								<option>36个月</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12" id="lxzj" style="margin-top: 10%; text-align: center; display: none;">
+					<img src="../../img/kuang.png" class="img-responsive center-block" alt="图标1" />
+					<p class="absolute-text-center" style="top:35%;left:0;margin:0">月利率：<span id="yuelilv">0.59%</span></p>
+					<p class="absolute-text-center" style="top:50%;left:0;margin:0">还款计划：<span id="hkyq">12</span>月期（每月还本息<span id="myhbx"></span>元）</p>
+					<p class="absolute-text-center one-font-size">利息总计&nbsp<span style="color:#ffc600" id="lxzj_main">12000</span><span style="color:#ffc600">元</span></p>
+				</div>
+				<div class="col-xs-10 col-xs-offset-1" style="margin-top: 15%; margin-bottom: 5%;">
+					<button type="button" id="submit" class="btn btn-default btn-block" style="background-color: #52b0ba;color:#ffffff">提交申请</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="../../js/jquery-3.1.0.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../../js/bootstrap.min.js"></script>
+		<script src="../../js/public.js"></script>
+
+		<script type="text/javascript" charset="utf-8">
+			window.ycd = 1;
+			window.qcd = 2;
+			window.ced = 3;
+			var now = new Date();
+			var year = now.getFullYear();
+			var month = now.getMonth() + 1;
+			var lilv = 0;
+
+			var name = getUrlParams("name");
+			var idNumber = getUrlParams("idCardNumber");
+			var licensePlate = getUrlParams("licensePlate");
+			var mile = getUrlParams("mileage");
+			var phone = getUrlParams("phone");
+			var carVehicle = getUrlParams("model");
+
+			function switchlilv() {
+				var type = getUrlParams("data")
+				if(type == window.ycd) {
+					lilv = 0.0059
+					document.title = "优车贷"
+				} else if(type == window.qcd) {
+					lilv = 0.0058
+					document.title = "青春贷"
+				} else if(type == window.ced) {
+					lilv = 0.0073
+					document.title = "车易贷"
+				}
+				document.getElementById("yuelilv").innerHTML = lilv * 100 + "%"
+			}
+
+			switchlilv();
+
+			function bindKeyEvent(obj, i) {
+
+				obj.keyup(function() {
+					var reg = $(this).val().match(/\d+\.?\d{0,1}/);
+					var txt = '';
+					if(reg != null) {
+						txt = reg[0];
+					}
+					$(this).val(txt);
+					if(i == 1) {
+						Calculatethemaximumamount(year, month, $(this).val())
+					} else if(i == 2) {
+						if(!$(this).val()) {
+
+							document.getElementById("hkyq").innerHTML = "-"
+							document.getElementById("myhbx").innerHTML = "-"
+							document.getElementById("lxzj_main").innerHTML = "-"
+						}
+						RepaymentPlan()
+					}
+
+				}).change(function() {
+					$(this).keypress();
+					var v = $(this).val();
+					if(/\.$/.test(v)) {
+						$(this).val(v.substr(0, v.length - 1));
+					}
+				});
+			}
+
+			$(document).ready(function() {
+				bindKeyEvent($("#gcyj"), 1)
+				bindKeyEvent($("#sqje_input"), 2)
+
+			});
+
+			for(var i = year; i > 2009; i--) {
+				$("#gcyj_year").append("<option>" + i + "</option>")
+			}
+
+			for(var i = 1; i <= month; i++) {
+				var bool = i == month
+				if(bool) {
+					$("#gcyj_month").append("<option selected='selected'>" + i + "</option>")
+				} else {
+					$("#gcyj_month").append("<option>" + i + "</option>")
+				}
+			}
+
+			document.getElementById("gcyj_year").onchange = yearChange;
+			document.getElementById("gcyj_month").onchange = monthChange;
+			document.getElementById("jdqx").onchange = RepaymentPlan;
+
+			function yearChange() {
+				var choseYear = $("#gcyj_year option:selected").text()
+				var choseMonth = $("#gcyj_month option:selected").text()
+				var gcyj = $("#gcyj")
+				$("#gcyj_month").children("option").remove()
+				if(choseYear < year) {
+					for(var i = 1; i <= 12; i++) {
+						$("#gcyj_month").append("<option>" + i + "</option>")
+					}
+				} else {
+					for(var i = 1; i <= month; i++) {
+						var bool = i == month
+						if(bool) {
+							$("#gcyj_month").append("<option selected='selected'>" + i + "</option>")
+						} else {
+							$("#gcyj_month").append("<option>" + i + "</option>")
+						}
+					}
+				}
+
+				if(gcyj.val()) {
+					Calculatethemaximumamount(choseYear, choseMonth, gcyj.val())
+				}
+			}
+
+			function monthChange() {
+				var choseYear = $("#gcyj_year option:selected").text()
+				var choseMonth = $("#gcyj_month option:selected").text()
+				var gcyj = $("#gcyj")
+				if(gcyj.val()) {
+					Calculatethemaximumamount(choseYear, choseMonth, gcyj.val())
+				}
+			}
+
+			function Calculatethemaximumamount(choseYear, choseMonth, gcyj) {
+				var x = year - choseYear;
+				if(x == 0) {
+					x = 1
+				}
+
+				var kdje = gcyj * 10000 * (1 - 0.1 * x) * 0.8
+				if(kdje > 500000) {
+					kdje = 500000
+				} else if(kdje < 50000) {
+					kdje = 50000
+				}
+				$("#dkje").css('display', 'block');
+				$("#sqje").css('display', 'block');
+				$("#dkqx").css('display', 'block');
+
+				document.getElementById("kdje").innerHTML = (kdje / 10000).toFixed(2)
+				document.getElementById("sqje_input").value = ""
+				document.getElementById("hkyq").innerHTML = "-"
+				document.getElementById("myhbx").innerHTML = "-"
+				document.getElementById("lxzj_main").innerHTML = "-"
+			}
+
+			function RepaymentPlan() {
+				var kdje = document.getElementById("kdje").innerHTML;
+
+				var sqje_input = $("#sqje_input")
+				if(!sqje_input.val()) return
+				if(parseFloat(sqje_input.val()) > parseFloat(kdje)) {
+					var con_firm = confirm("您的贷款金额最高为"+kdje+"万元")
+					if(con_firm==true){
+					
+						document.getElementById('sqje_input').value = ""
+					}else{
+					
+						document.getElementById('sqje_input').value = ""
+					}
+				}
+				var chosedkqx = $("#jdqx option:selected").text()
+				var dkqx = chosedkqx.substring(0, 2)
+
+				var lxzj = lilv * sqje_input.val() * 10000 * dkqx
+				var myghbx = sqje_input.val() * 10000 / dkqx + lilv * sqje_input.val() * 10000
+				document.getElementById("hkyq").innerHTML = dkqx
+				document.getElementById("myhbx").innerHTML = myghbx.toFixed(2)
+				document.getElementById("lxzj_main").innerHTML = lxzj.toFixed(2)
+				$("#lxzj").css('display', 'block');
+			}
+
+			$('#submit').on("click", function() {
+				submitFinance()
+			});
+
+			function submitFinance() {
+				if(!$("#sqje_input").val()) {
+					alert("请输入申请金额")
+					$("#sqje_input").focus()
+					return
+				}
+				showloaddinghtml5(1)
+				var paramsData = {};
+				paramsData['url'] = 'https://mobile.sxwinstar.net/wechat_access/api/v1/finance/save';
+				paramsData['debug'] = true;
+
+				paramsData['financeType'] = getUrlParams("data");
+				paramsData['name'] = name;
+				paramsData['idCardNumber'] = idNumber;
+				paramsData['licensePlate'] = licensePlate;
+				paramsData['mileage'] = mile;
+				paramsData['phone'] = phone;
+				paramsData['model'] = carVehicle;
+				paramsData['amount'] = $("#sqje_input").val() * 10000;
+				paramsData['onlineValuation'] =document.getElementById("kdje").innerHTML ;
+
+				paramsData['type'] = "post";
+				paramsData['async'] = false;
+				paramsData['funSuccess'] = function(result) {
+					console.log(result+"提交数据");
+					window.location.href = "../success.html?data="+getUrlParams("data")
+				};
+
+				paramsData['funError'] = function (XMLHttpRequest) {
+        				alert('当前访问人数过多，请稍后再试！');
+        				console.log(XMLHttpRequest);
+    				};
+				comajax(paramsData);
+			}
+		</script>
+	</body>
+
+</html>

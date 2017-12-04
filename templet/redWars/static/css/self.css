@@ -1,0 +1,77 @@
+/*领取红包*/
+* {
+     margin: 0;
+     padding: 0;
+     border: none;
+     outline: none;
+     list-style: none;
+ }
+
+#imgBox img {
+    width: 100%;
+}
+
+#phoneNumber {
+    padding: 20px 8% 0;
+}
+
+#phoneNumber input, .receive{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+#phoneNumber #phone {
+    border: 1px solid #D7D7D7;
+    font-size: 14px;
+}
+
+.receive {
+    font-size: 16px;
+}
+
+#notice a {
+    width: 24%;
+    padding:2px 0;
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: -0.39px;
+    text-decoration: none;
+    border-bottom: 1px solid #666;
+}
+#notice ul {
+    display: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#notice li {
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: -0.34px;
+    text-align: left;
+}
+
+.success {
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 20px 0;
+}
+
+.bg-blue {
+    background: #3ca8d9;
+}
+
+.ac {
+    text-align: center;
+}
+
+.white {
+    color: #fff;
+}

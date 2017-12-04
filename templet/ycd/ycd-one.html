@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/global.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .good-car-loan-two-top {
+            margin-top: 5%;
+        }
+
+        .form-control {
+            font-size: x-small;
+        }
+
+        .input-group-addon {
+            width: 96px;
+            background-color: #3f5c7e;
+            color: #ffffff;
+        }
+
+        .text-primary {
+            color: #52b0ba;
+        }
+
+        .before-content {
+            position: absolute;
+            left: 110px;
+            top: 30%;
+            z-index: 10;
+        }
+        .input-lg{
+            padding: 6px 12px;
+        }
+        .form-control {
+            font-size: 14px;
+        }
+        .input-group {
+            width: 100%;
+        }
+        .unit {
+            position: absolute;
+            right: 20px;
+            z-index: 34;
+            padding: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 good-car-loan-two-top">
+            <img id="image" src="../../img/2017220/youchedai.png" class="img-responsive center-block" alt="优车贷@2x"/>
+        </div>
+        <div class="col-xs-11" style="margin-top: 10%;margin-left:4.1666666%">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon" style="padding: 6px 15px">姓&nbsp&nbsp&nbsp&nbsp名</div>
+                    <input type="text" id="name" class="form-control input-lg" placeholder="请输入您的姓名" autocomplete="on" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">身份证号</div>
+                    <input type="text" id="idNumber" class="form-control input-lg" maxlength="18" onkeydown="onlyNum();"
+                           placeholder="请输入您的身份证号" autocomplete="on" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">联系方式</div>
+                    <input type="tel" id="phoneNumber" class="form-control input-lg" maxlength="11"
+                           onkeydown="onlyNum();" placeholder="请输入您的手机号" autocomplete="on" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">车&nbsp牌&nbsp号</div>
+                    <label class="before-content">陕A</label>
+                    <input type="email" id="carNumber" class="form-control input-lg"
+                           onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="5" autocomplete="on"
+                           style="text-indent: 26px;text-transform:uppercase;" placeholder="请输入您的车牌号" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">行驶里程数</div>
+                    <span class="pull-right h5 unit">万公里</span>
+                    <input type="number" id="mile" class="form-control input-lg" autocomplete="off"
+                           oninput="if(value.length>8)value=value.slice(0,8)" autocomplete="on"
+                           onkeyup="CheckInputIntFloat(this);" placeholder="最多两位小数" />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">车辆型号</div>
+                    <input type="text" id="carVehicle" class="form-control input-lg" placeholder="例如：轿车"
+                           autocomplete="on" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-11" style="margin-left:4.1666666%">
+            <a href="../help.html" class="text-primary" style="text-decoration: underline; float: right">常见问题</a>
+        </div>
+        <div class="col-xs-11 text-center good-car-loan-two-top" style="margin-left:4.1666666%">
+            <div class="checkbox">
+                <label style="font-size: x-small;">
+                    <input type="checkbox" id="checkbox" checked="checked" style="margin: 2px 0 0 -15px;" value=""/>
+                    已阅读并同意<a href="../help.html">《贷款服务相关协议》</a>
+                </label>
+            </div>
+            <button type="button" id="next" class="btn btn-default btn-block"
+                    style="background-color: #52b0ba;color:#ffffff;border-color: transparent;">下一步
+            </button>
+        </div>
+        <div class="col-xs-12 text-center good-car-loan-two-top" style="font-size: x-small;">
+            <p>咨询电话
+                <a href="tel:02989628572" style="text-decoration: underline;color: #337ab7">029-89628572</a>
+            </p>
+            <p>地址 西安市南大街粉巷真爱粉巷里3层</p>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/jquery-3.1.0.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/public.js"></script>
+
+
+<script type="text/javascript">
+    window.ycd = 1;
+    window.qcd = 2;
+    window.ced = 3;
+
+    function switchdk() {
+        var type = getUrlParams("data");
+        if (type == window.ycd) {
+            document.title = "优车贷";
+            $('#image').attr("src", "../../img/2017220/youchedai.png")
+        } else if (type == window.qcd) {
+            document.title = "青春贷";
+            $('#image').attr("src", "../../img/2017220/qingchundai.png")
+        } else if (type == window.ced) {
+            document.title = "车易贷";
+            $('#image').attr("src", "../../img/2017220/cheyidai.png")
+        }
+    }
+    switchdk();
+
+    function onlyNum() {
+        if (!(event.keyCode == 46) && !(event.keyCode == 8) && !(event.keyCode == 37) && !(event.keyCode == 39))
+            if (!((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))
+                event.returnValue = false; //执行至该语句时，阻止输入；可类比阻止冒泡原理或者禁止右键功能；
+    }
+
+    //验证只能输入两位小数
+    function CheckInputIntFloat(oInput) {
+        var number = /\d{1,}\.{0,1}\d{0,2}/;
+        if ('' != oInput.value.replace(number, '')) {
+            oInput.value = oInput.value.match(number) == null ? '' : oInput.value.match(number);
+        }
+    }
+
+    $('#next').on("click", function () {
+        var phoneNumber = $("#phoneNumber").val();
+
+        if (checkInput()) {
+            checkPhone(phoneNumber);
+        }
+    });
+
+    function checkInput() {
+        var name = $("#name")
+        if (!name.val()) {
+            alert("请输入姓名!");
+            name.focus()
+            return false
+        } else {
+            var reg = /^[\u4e00-\u9fa5]{2,10}$/i;
+            if (!reg.test(name.val())) {
+                alert("请输入真实姓名!");
+                name.focus()
+                return false
+            }
+        }
+
+        var idNumber = $("#idNumber");
+        if (!idNumber.val()) {
+            alert("请输入身份证号!");
+            idNumber.focus();
+            return false;
+        }
+        var idReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (!idReg.test(idNumber.val())) {
+            alert("请输入正确的身份证号!");
+            idNumber.focus();
+            return false;
+        }
+
+        var licensePlate = $("#carNumber")
+        if (!licensePlate.val()) {
+            alert("请输入车牌号!")
+            licensePlate.focus()
+            return false
+        } else {
+            var re = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
+            var tempLicensePlate = ("陕A" + licensePlate.val().toUpperCase())
+            if (!re.test(tempLicensePlate)) {
+                alert("输入的车牌号格式不正确!");
+                licensePlate.focus()
+                return false;
+            }
+        }
+
+        var mile = $("#mile");
+        if (!mile.val()) {
+            alert("请输入车辆行驶里程数");
+            mile.focus();
+            return false;
+        }
+
+        var phoneNumber = $("#phoneNumber")
+        if (!phoneNumber.val()) {
+            alert("请输入手机号!")
+            phoneNumber.focus()
+            return false
+        } else {
+            var myreg = /^1[34578]\d{9}$/;
+            if (!myreg.test(phoneNumber.val())) {
+                alert('请输入有效的手机号码！');
+                phoneNumber.focus();
+                return false;
+            }
+        }
+
+        var carVehicle = $("#carVehicle");
+        if (!carVehicle.val()) {
+            alert("请输入车辆型号！");
+            carVehicle.focus();
+            return false;
+        }
+
+        if (!document.getElementById("checkbox").checked) {
+            var r = confirm("是否同意相关协议")
+            if (r == true) {
+                $("#checkbox").attr("checked", "checked")
+            }
+            return false
+        }
+        return true
+    }
+    $("#checkbox").click(function () {
+        if ($(this).attr("checked")) {
+            $(this).removeAttr("checked")
+        } else {
+            $(this).attr("checked", 'checked')
+        }
+    });
+
+    //验证手机号码是否申请过贷款
+    function checkPhone(phone) {
+        var paramsData = {};
+        paramsData['url'] = 'https://mobile.sxwinstar.net/wechat_access/api/v1/finance/checkPhone';
+        paramsData['debug'] = false;
+
+        paramsData['phone'] = phone;
+
+        paramsData['type'] = "post";
+        paramsData['async'] = true;
+        paramsData['funSuccess'] = function (result) {
+            console.log(result);
+            if (result.status == 0) {
+                console.log("成功进入");
+                loanInformation();
+            } else {
+                alert("该手机号码已申请!");
+                return false;
+            }
+        };
+        paramsData['funError'] = function (XMLHttpRequest) {
+            alert('手机号码不存在！');
+            console.log(XMLHttpRequest);
+            return false;
+        };
+        comajax(paramsData);
+    }
+
+    function loanInformation() {
+        var name = $("#name").val();
+        var idNumber = $("#idNumber").val();
+        var plateNumber = "陕A" + $("#carNumber").val().toUpperCase();
+        var mile = $("#mile").val();
+        var phoneNumber = $("#phoneNumber").val();
+        var carVehicle = $("#carVehicle").val();
+        var urlNext = "ycd-two.html?name=" + name + "&idCardNumber=" + idNumber + "&licensePlate=" + plateNumber + "&mileage=" + mile + "&phone=" + phoneNumber + "&model=" + carVehicle + "&data=" + getUrlParams("data");
+
+        var paramsData = {};
+        paramsData['url'] = 'https://mobile.sxwinstar.net/wechat_access/api/v1/platenumbers/plateNumberTypeSearch';
+        paramsData['debug'] = false;
+
+        paramsData['plateNumber'] = plateNumber;
+        paramsData['plateNumberType'] = "02";
+
+        paramsData['type'] = "get";
+        paramsData['async'] = true;
+        paramsData['funSuccess'] = function (result) {
+            console.log(result);
+            window.location.href = encodeURI(urlNext);
+        };
+        paramsData['funError'] = function (data) {
+            alert('车牌号码不存在！');
+            console.log(data);
+            return false;
+        };
+        comajax(paramsData, "2b254bec-dd48-11e6-81f7-9457a5545c84");
+    }
+</script>
+</body>
+</html>

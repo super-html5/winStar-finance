@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>优车贷</title>
+
+		<!-- Bootstrap -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	</head>
+	<style>
+			.good-car-loan-two-top {
+				margin-top: 20%;
+			}
+			.zijianju{
+				letter-spacing:2px;
+			}
+	</style>
+
+	<body>
+		<div class="container-fluid">
+		<div class=" text-center" style="padding:10% 0;">
+			<img src="../img/youchedai.png" id="img"  class="center-block" alt="优车贷@2x" />
+		</div>
+		<div class="text-center text-muted zijianju" style="margin-top: -10%;">
+			<h5 class="red bto-h1 text-center">
+				<p>咨询办理电话</p>
+				<p><a href="tel:89628572" style="text-decoration: underline;color: #337ab7">029-89628572</a></p>
+			</h5>
+		</div>
+		
+		</div>
+		<div class="zijianju" style="font-size: x-small;bottom:10%;position:absolute;text-align: center;width:100%;padding: 0;">
+					<p>地址 西安市南大街粉巷真爱粉巷里3层</p>
+				</div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="../js/jquery-3.1.0.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/public.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			var type = getUrlParams("data");
+			if(type==1){
+				document.title="优车贷"
+				$('#img').attr("src", "../img/youchedai.png")
+			}else if(type == 3){
+				document.title="车易贷"
+				$('#img').attr("src", "../img/cheyidai.png")
+			}
+		</script>
+	</body>
+
+</html>

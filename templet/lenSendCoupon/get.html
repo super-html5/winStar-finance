@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加油优惠券</title>
+    <meta name="renderer" content="webkit"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no,address=no,email=no"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css"/>
+    <link rel="stylesheet" href="css/index.css">
+    <link href="css/global.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/public.js"></script>
+    <script>
+        window.use_screen_base = '640';
+    </script>
+    <style>
+        #swal2-content {
+            color: white;
+            font-weight: 900;
+        }
+
+        .swal2-modal .swal2-styled {
+            color: #ee1f0c;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <img src="img/page2_02.png" alt="">
+    <div class="getImg">
+        <img src="img/page2_03.jpg" alt="">
+        <div class="getImg1">
+            <img src="img/1.png" alt="">
+            <button class="getCoupon" onclick="s1('8a8094ef5f90be79015f947bf957000c','img/4.png')"></button>
+        </div>
+        <div class="getImg2">
+            <img src="img/2.png" alt="">
+            <button class="getCoupon" onclick="s2('8a8094ef5f90be79015f947cb374000e','img/5.png')"></button>
+        </div>
+        <div class="getImg3">
+            <img src="img/3.png" alt="">
+            <button class="getCoupon" onclick="s3('8a8094ef5f90be79015f947d32170010','img/6.png')"></button>
+        </div>
+    </div>
+    <img src="img/page2_04.jpg" alt="">
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
+<script>
+
+    var phone = getUrlParams("phone");
+    var accountId = getUrlParams("accountId");
+    var stationId = getUrlParams("stationId");
+    function ajaxData(str, imgSrc) {
+        showloaddinghtml5(1);
+        $.ajax({
+            type: "post",
+            url: "/wechat_access/api/v1/marketing/coupon/receive/gas_station?" +
+            "activityId=8a8094ef5f90be79015f9483598f0013&stationId=" +
+            stationId + "&telPhone=" + phone + "&templateId=" + str,
+            headers: {
+                'Content-Type': 'application/json',
+                'accountId': accountId,
+                'token_id': '2b254bec-dd48-11e6-81f7-9457a5545c84'
+            },
+            success: function () {
+                var date = new Date();
+                showloaddinghtml5(0);
+                location.href = 'use.html?myAttr=' + imgSrc + '&date=' + date;
+            },
+            error: function (data) {
+                showloaddinghtml5(0);
+                if (data.responseJSON.code == 'coupons.AuthFail') {
+                    swal({
+                        text: '你已经领取过！',
+                        confirmButtonText: '确定',
+                        confirmButtonColor: '#fed320',
+                        background: '#ee1f0c',
+                        color: '#ee1f0c'
+                    });
+                } else {
+                    swal({
+                        text: '当前服务器繁忙请稍后再试！',
+                        confirmButtonText: '确定',
+                        confirmButtonColor: '#fed320',
+                        background: '#ee1f0c',
+                        color: '#ee1f0c'
+                    });
+                }
+            }
+        })
+    }
+    function s1(str, imgSrc) {
+        swal({
+            text: '确定领取10元加油券吗？',
+            showCancelButton: true,
+            confirmButtonColor: '#fed320',
+            cancelButtonColor: '#fed320',
+            background: '#ee1f0c',
+            confirmButtonText: '确定',
+            cancelButtonText: '取消'
+        }).then(function () {
+            ajaxData(str, imgSrc);
+        }, function () {
+            console.log('error')
+        });
+
+    }
+
+    function s2(str, imgSrc) {
+        swal({
+            text: '确定领取33元加油券吗？',
+            showCancelButton: true,
+            confirmButtonColor: '#fed320',
+            cancelButtonColor: '#fed320',
+            background: '#ee1f0c',
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+        }).then(function () {
+            ajaxData(str, imgSrc);
+        }, function () {
+            console.log('error')
+        });
+    }
+
+    function s3(str, imgSrc) {
+        swal({
+            text: '确定领取60元加油券吗？',
+            showCancelButton: true,
+            confirmButtonColor: '#fed320',
+            cancelButtonColor: '#fed320',
+            background: '#ee1f0c',
+            confirmButtonText: '确定',
+            cancelButtonText: '取消'
+        }).then(function () {
+            ajaxData(str, imgSrc);
+        }, function () {
+            console.log('error')
+        });
+    }
+</script>
+</html>

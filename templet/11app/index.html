@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>测测你和爱车的亲密度是？</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css"/>
+    <link href="css/global.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        //适配
+        window.use_screen_base = '750';
+        (function (a, b) {
+            if (typeof(use_screen_base) != "undefined") {
+                var c = "orientationchange" in b ? "orientationchange" : "resize",
+                    d = use_screen_base.indexOf("_mate"),
+                    e = parseInt(use_screen_base),
+                    f = a.documentElement,
+                    g = function () {
+                        var a = f.clientWidth,
+                            c = b.innerWidth;
+                        f.style.fontSize = 100 * (c / e) + "px"
+                    };
+                if (/iPad.*OS|iPhone.*OS/.test(navigator.userAgent) && d > 0) {
+                    var h = a.querySelectorAll("meta[name=viewport]");
+                    h[0] && h[0].setAttribute("content", "width=device-width, user-scalable=no, initial-scale=" + 1 / b.devicePixelRatio)
+                }
+                g(), b.addEventListener(c, g, !1), delete use_screen_base
+            }
+        })(document, window);
+    </script>
+    <style>
+        img {
+            margin: auto;
+        }
+
+        #bgimg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+        }
+
+        .mtop {
+            padding: .1rem;
+        }
+
+        .item {
+
+        }
+
+        .item.active {
+            background: url(./img/9/bg2.png) no-repeat center;
+            background-size: 88%;
+        }
+
+        /*body.swal2-iosfix {*/
+        /*position: relative;*/
+        /*}*/
+        body.swal2-iosfix {
+            bottom: 0;
+        }
+
+        .swal2-container {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        .swal2-modal .swal2-input[type='number'] {
+            max-width: inherit;
+        }
+
+        .swal2-modal .swal2-title {
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            color: #74E2E7;
+
+        }
+
+        .jb {
+            background: -webkit-gradient(linear, 100% 0%, 0% 100%, from(#74E2E7), to(#0069B2));
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+        }
+
+        .swal2-input {
+            background-color: #0c0f16;
+            color: #ffffff;
+        }
+
+        .swal2-modal .swal2-validationerror {
+            background-color: #0c0f16;
+            color: #ffffff;
+        }
+
+        .swal2-confirm {
+            background: -webkit-linear-gradient(left, #44a9ce, #0069B2 50%, #44a9ce);
+            background: -o-linear-gradient(left, #44a9ce, #0069B2 50%, #44a9ce);
+            background: -moz-linear-gradient(left, #44a9ce, #0069B2 50%, #44a9ce);
+            background: linear-gradient(left, #44a9ce, #0069B2 50%, #44a9ce);
+            background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#44a9ce), color-stop(0.5, #0069B2), to(#44a9ce));
+        }
+
+        .swal2-cancel {
+            background: -webkit-linear-gradient(left, #44a9ce, #0069B2 50%, #44a9ce);
+            background: -o-linear-gradient(left, #44a9ce, #0069B2 50%, #44a9ce);
+            background: -moz-linear-gradient(left, #44a9ce, #0069B2 50%, #44a9ce);
+            background: linear-gradient(left, #44a9ce, #0069B2 50%, #44a9ce);
+            background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#44a9ce), color-stop(0.5, #0069B2), to(#44a9ce));
+        }
+
+        .swal2-modal .swal2-styled {
+            padding: 9px 20px;
+        }
+
+        .box {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+<img id="bgimg" class="img-responsive" src="img/cj/bg.png">
+<div class="container-fluid">
+    <div class="row" style="margin-top: .6rem; text-align: center;margin-left: auto;margin-right: auto">
+        <div class="col-xs-5">
+            <img id="cdt" style="margin: auto" class="img-responsive" src="img/cj/8-1.png"/>
+        </div>
+        <div class="col-xs-5 col-xs-offset-2">
+            <img id="fx" style="margin: auto" class="img-responsive" src="img/cj/8-2.png"/>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;text-align: center;">
+        <div class="col-xs-10 col-xs-offset-1">
+            <table id="lottery" style="margin: auto">
+                <tr>
+                    <td class="item col-xs-4 mtop lottery-unit lottery-unit-0">
+                        <img class="img-responsive" src="img/9/img1.png" alt="">
+                    </td>
+                    <td class="item col-xs-4 mtop lottery-unit lottery-unit-1">
+                        <img class="img-responsive" src="img/9/img2.png" alt="">
+                    </td>
+                    <td class="item col-xs-4 mtop lottery-unit lottery-unit-2">
+                        <img class="img-responsive" src="img/9/img3.png" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="item col-xs-4 col-sm-4 mtop lottery-unit lottery-unit-7">
+                        <img class="img-responsive" src="img/9/img4.png" alt="">
+                    </td>
+                    <td class="item col-xs-4 col-sm-4 mtop" id="draw-btn">
+                        <img class="img-responsive" src="img/9/img5.png" alt="">
+                    </td>
+
+                    <td class="item col-xs-4 col-sm-4 mtop lottery-unit lottery-unit-3">
+                        <img class="img-responsive" src="img/9/img6.png" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="item col-xs-4 col-sm-4 mtop lottery-unit lottery-unit-6">
+                        <img class="img-responsive" src="img/9/img7.png" alt="">
+                    </td>
+                    <td class="item col-xs-4 col-sm-4 mtop lottery-unit lottery-unit-5">
+                        <img class="img-responsive" src="img/9/img8.png" alt="">
+                    </td>
+                    <td class="item col-xs-4 col-sm-4 mtop lottery-unit lottery-unit-4">
+                        <img class="img-responsive" src="img/9/img9.png" alt="">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-6" style="color: #f7af01;font-size: .3rem">
+            还有&nbsp;<span id="syNum"></span>&nbsp;次抽奖机会
+        </div>
+    </div>
+    <div class="row" style="color: #74E2E7;">
+        <div class="col-xs-4 text-center"
+             style="margin-right:0;padding-right:0;padding-left: 30px">
+            <hr style="border-top: 1px solid #74E2E7;">
+        </div>
+        <div class="col-xs-4 text-center"
+             style="margin-left: 0;margin-right:0;padding-left: 0;padding-right: 0;
+                        line-height: 2;font-size: .4rem">
+            活动说明
+        </div>
+        <div class="col-xs-4 text-center"
+             style="margin-left: 0;padding-left: 0; padding-right: 30px">
+            <hr style="border-top: 1px solid #74E2E7;">
+        </div>
+    </div>
+    <div class="row" style="color: #ffffff;
+     padding-right: 15px; font-size: .24rem">
+        <div class="col-xs-12 col-sm-12">
+            <ol>
+                <li style="margin-bottom: .1rem">活动期间内，每人有1次抽奖机会，分享可多得1次抽奖机会。</li>
+                <li style="margin-bottom: .1rem">该加油代金券可用于优驾行easy APP 平台内油卡购买。</li>
+                <li style="margin-bottom: .1rem">该加油代金券不兑换、不找零，不与平台内其他优惠同时使用。</li>
+                <li style="margin-bottom: .1rem">活动时间：11月7日~11月13日。</li>
+                <li>本次活动最终解释权归优驾行所有。如有疑问，请致电400-801-2122.</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="box" style="text-align: center;display: none">
+    <div style="color: #ffffff; font-size: .3rem; font-weight: 900;padding-top: 30px">点击右上角"分享"，即可分享快乐
+        <img style="position: absolute;top: 5px;right: 20px;" class="img-responsive" src="img/index1/8-6.png">
+    </div>
+</div>
+<input id="beginTime" type="hidden"/>
+<input id="nowTime" type="hidden"/>
+<input id="endTime" type="hidden"/>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
+<script src="js/index2.js"></script>
+<script>
+
+</script>
+</body>
+
+</html>

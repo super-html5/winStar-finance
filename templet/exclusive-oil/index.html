@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>优驾行&长城物业专属加油包</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">
+    <script src="../../js/jquery-3.1.0.min.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+<body>
+<div class="container-box">
+    <div class="page page1_01"></div>
+    <div class="page page1_02 text-center">
+        <input id="phone" type="tel" maxlength="11" class="input-card" placeholder="输入手机号领取"/></div>
+    <div class="page page1_03"></div>
+    <div id="btnGet" class="page page1_04"></div>
+    <div class="page page1_05"></div>
+</div>
+
+<div id="dialogs1" class="dialogs1 hidden">
+    <div class="dialogs1-button"></div>
+</div>
+<div id="dialogs2" class="dialogs2 hidden">
+<div class="dialogs2-button"></div>
+</div>
+
+<div class="layer hidden">
+</div>
+<script>
+    var layer = $(".layer");
+    var dialogs1 = $("#dialogs1");
+    var dialogs2 = $("#dialogs2");
+    var dialogs1Button = $(".dialogs1-button");
+    var dialogs2Button = $(".dialogs2-button");
+
+    $("#btnGet").on("click", function () {
+        var phone = $("#phone").val();
+        var myreg = /^1[34578]\d{9}$/;
+        if(!myreg.test(phone)){
+            layer.removeClass("hidden");
+            dialogs1.removeClass("hidden");
+        }else{
+            checkPhone(phone);
+        }
+    });
+
+    layer.on("click", function () {
+        $(this).addClass("hidden");
+        dialogs1.addClass("hidden");
+        dialogs2.addClass("hidden");
+    });
+
+    dialogs1Button.on("click", function () {
+        layer.addClass("hidden");
+        dialogs1.addClass("hidden");
+    });
+
+    dialogs2Button.on("click", function () {
+        layer.addClass("hidden");
+        dialogs2.addClass("hidden");
+        location.href ="http://a.app.qq.com/o/simple.jsp?pkgname=com.wsd.yjx";
+    });
+
+
+    //根据手机号获取用户基本信息
+    function checkPhone(phoneNumber) {
+        showloaddinghtml5(1);
+        $.ajax({
+            //提交数据的类型 POST GET
+            type: "POST",
+            headers: {'Content-Type': 'application/json'},
+            //提交的网址
+           url: 'https://mobile.sxwinstar.net/wechat_access/api/user/account/loginH5?mobile=' + phoneNumber + '&verify=24b6e946d4594661a58bd235fe639544',
+//              url: '/wechatApi-ng4/api/user/account/loginH5?mobile=' + phoneNumber + '&verify=24b6e946d4594661a58bd235fe639544',
+//            返回数据的格式
+            dataType: "json",
+            //成功返回之后调用的函数
+            success: function (data) {
+                oilCard(data.id);
+            },
+            //调用出错执行的函数
+            error: function (data) {
+                showloaddinghtml5(0);
+               alert("网络异常!");
+            }
+        });
+    }
+
+    //验证手机号码是否领取过优惠券
+    function oilCard(accountId) {
+        var phoneNumber = $("#phone").val();
+        $.ajax({
+            //提交数据的类型 POST GET
+            type: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'token_id': '2b254bec-dd48-11e6-81f7-9457a5545c84',
+                'accountId': accountId
+            },
+            //提交的网址
+            url: 'https://mobile.sxwinstar.net/wechat_access/api/v1/marketing/coupon/receive/common?activityId=8a80cb815f4fe2ae015f4ff89b4f0019,8a80cb815f4fe2ae015f4ff85f570017,8a80cb815f4fe2ae015f4ff801bd0015,8a80cb815f4fe2ae015f4ff7a9080013&telPhone=' + phoneNumber ,
+//          url: '/wechatApi-ng4/api/v1/marketing/coupon/receive/common?activityId=8a80cb815f4fe2ae015f4ff89b4f0019,8a80cb815f4fe2ae015f4ff85f570017,8a80cb815f4fe2ae015f4ff801bd0015,8a80cb815f4fe2ae015f4ff7a9080013&telPhone=' + phoneNumber,
+            //返回数据的格式
+            dataType: "json",
+            //成功返回之后调用的函数
+            success: function (data) {
+                showloaddinghtml5(0);
+                location.href = "success.html";
+            },
+            //调用出错执行的函数
+            error: function (data) {
+                showloaddinghtml5(0);
+                if (data.responseJSON.code == 'coupons.AuthFail') {
+                    layer.removeClass("hidden");
+                    dialogs2.removeClass("hidden");
+                }
+                if (data.responseJSON.code == 'NotAllow') {
+                    alert( '活动未开始！');
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
