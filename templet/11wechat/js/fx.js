@@ -1,30 +1,5 @@
 $(document).ready(function () {
 
-    function toShareBack() {
-        $.ajax({
-            //提交数据的类型 POST GET
-            type: "POST",
-            //提交的网址
-            url: '/wechat_access/api/v1/nationalActivity/win/integral',
-            //url: '/wechatApi-ng4/api/v1/nationalActivity/win/integral',
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "token_id": localStorage.getItem('token_id')
-            },
-            //返回数据的格式
-            dataType: "json",
-            //成功返回之后调用的函数
-            success: function (data) {
-                _init(localStorage.getItem('token_id'));
-                location.href = 'index.html';
-            },
-            //调用出错执行的函数
-            error: function (data) {
-                location.href = 'index.html';
-            }
-        });
-    }
-
     var url = window.document.location.href;
     $.post(
         "/wechat_access/api/v1/wechatCommon/noauth/getWechatShareData",
@@ -103,8 +78,7 @@ $(document).ready(function () {
                         //alert('用户点击发送给朋友');
                     },
                     success: function (res) {
-                        //alert('分享成功！');
-                        toShareBack();
+                        console.log('success');
                     },
                     cancel: function (res) {
                         //alert('已取消');
@@ -126,7 +100,6 @@ $(document).ready(function () {
                     },
                     success: function (res) {
                         //alert('分享成功！');
-                        toShareBack();
                     },
                     cancel: function (res) {
                         //alert('已取消');
@@ -188,6 +161,7 @@ $(document).ready(function () {
                 });
             });
             wx.error(function (res) {
+
             });
         }
     );
